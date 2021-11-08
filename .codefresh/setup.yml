@@ -1,5 +1,16 @@
 version: '1.0'
+stages:
+  - "clone"
 steps:
+  clone:
+    title: "Cloning repository"
+    type: "git-clone"
+    repo: "cb-seenivasan/eks-installer"
+    # CF_BRANCH value is auto set when pipeline is triggered
+    # Learn more at codefresh.io/docs/docs/codefresh-yaml/variables/
+    revision: master
+    git: "cb-seenivasan"
+    stage: "clone"
 
   check_env:
     title: Check environment for required variables
