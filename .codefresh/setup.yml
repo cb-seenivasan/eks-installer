@@ -56,7 +56,7 @@ steps:
       - wget https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/heptio-authenticator-aws
       - chmod +x heptio-authenticator-aws
       - cp heptio-authenticator-aws /usr/local/bin
-      - export KUBECONFIG="$(pwd)/kubernetes/kubeconfig.yaml"
+      - export KUBECONFIG="kubernetes/kubeconfig.yaml"
       - cd kubernetes/
       - kubectl apply -f config-map-aws-auth.yaml
       - kubectl apply -f service-account.yaml
