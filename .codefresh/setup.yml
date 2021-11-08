@@ -50,6 +50,7 @@ steps:
   create_kubernetes_resources:
     title: Create additional Kubernetes resources
     image: lachlanevenson/k8s-kubectl:v1.10.4
+    working_directory: "${{clone}}"
     commands:
       - rm -f heptio-authenticator-aws
       - wget https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/heptio-authenticator-aws
@@ -73,6 +74,7 @@ steps:
   get_token:
     title: Extract token from Kubernetes secret
     image: lachlanevenson/k8s-kubectl:v1.10.4
+    working_directory: "${{clone}}"
     commands:
       - cp heptio-authenticator-aws /usr/local/bin
       - export KUBECONFIG="$(pwd)/kubernetes/kubeconfig.yaml"
