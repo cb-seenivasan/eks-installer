@@ -34,7 +34,9 @@ steps:
     working_directory: "${{clone}}"
     commands:
       - apk add --update make bash
-      - set +e; make setup; 
+      - set +e
+      - make setup;
+      - cf_export RC=$? 
 
   save_tfstate:
     title: Save Terraform statefile to Codefresh context
