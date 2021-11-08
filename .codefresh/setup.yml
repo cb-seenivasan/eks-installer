@@ -12,6 +12,7 @@ steps:
   load_tfstate:
     title: Attempt to load Terraform statefile from Codefresh context
     image: codefresh/cli:0.8.54
+    working_directory: ./
     commands:
       - apk add --update make bash
       - ./scripts/codefresh-load-tfstate.sh || echo "Skipping."
@@ -19,6 +20,7 @@ steps:
   setup_eks_cluster:
     title: Setup EKS cluster using Terraform
     image: hashicorp/terraform:0.11.7
+    working_directory: ./
     commands:
       - apk add --update make bash
       - set +e; ./scripts/setup.sh; cf_export RC=$?
@@ -26,6 +28,7 @@ steps:
   save_tfstate:
     title: Save Terraform statefile to Codefresh context
     image: codefresh/cli:0.8.54
+    working_directory: ./
     commands:
       - apk add --update make bash
       - ./scripts/codefresh-save-tfstate.sh
