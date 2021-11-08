@@ -30,7 +30,7 @@ steps:
 
   setup_eks_cluster:
     title: Setup EKS cluster using Terraform
-    image: hashicorp/terraform:latest
+    image: hashicorp/terraform:1.0.10
     working_directory: "${{clone}}"
     commands:
       - apk add --update make bash
