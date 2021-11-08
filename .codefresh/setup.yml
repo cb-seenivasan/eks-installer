@@ -14,21 +14,21 @@ steps:
     image: codefresh/cli:0.8.54
     commands:
       - apk add --update make bash
-      - make codefresh-load-tfstate || echo "Skipping."
+      - ./scripts/codefresh-load-tfstate.sh || echo "Skipping."
 
   setup_eks_cluster:
     title: Setup EKS cluster using Terraform
     image: hashicorp/terraform:0.11.7
     commands:
       - apk add --update make bash
-      - set +e; make setup; cf_export RC=$?
+      - set +e; ./scripts/setup.sh; cf_export RC=$?
 
   save_tfstate:
     title: Save Terraform statefile to Codefresh context
     image: codefresh/cli:0.8.54
     commands:
       - apk add --update make bash
-      - make codefresh-save-tfstate
+      - ./scripts/codefresh-save-tfstate.sh
       - exit ${{RC}}
 
   create_kubernetes_resources:
@@ -69,4 +69,4 @@ steps:
       - apk add --update make bash jq
       - export K8S_CA="$(cat kubernetes/kubeca.txt)"
       - export K8S_HOST="$(cat kubernetes/kubehost.txt)"
-      - make codefresh-add-cluster
+      - ./scripts/codefresh-add-cluster.sh
